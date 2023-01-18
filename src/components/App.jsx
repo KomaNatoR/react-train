@@ -1,13 +1,30 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
+import shortid from "shortid";
 
-import Form from "./TodoList/Form/Form";
+// import Form from "./TodoList/Form/Form";
 import TodoList from "./TodoList";
+import TodoEditor from "./TodoList/TodoEditor/TodoEditor";
+import FilterTodo from "./TodoList/FilterTodo/FilterTodo";
 import initialTodos from "../todos.json";
 
 
 class App extends Component {
   state = {
     todos: initialTodos,
+    filter:"",
+  };
+
+  addTodo = (text) => {
+
+    const todo = {
+      id: shortid.generate(),
+      text,
+      completed: false,
+    };
+
+    this.setState(prevState => ({
+      todos: [todo,...prevState.todos],
+    }));
   };
 
   deleteTodos = (todoId) => {
@@ -16,26 +33,47 @@ class App extends Component {
     }))
   };
 
-  formSubmitHandler = data => {
-    console.log(data);
+  toggleCompleted = (todoId) => {
+    console.log(todoId);
+
+    this.setState(({todos}) => ({
+      todos: todos.map(todo =>
+        todo.id === todoId ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    }));
   };
+
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  // formSubmitHandler = data => {
+  //   console.log(data);
+  // };
     
   render() {
-    const { todos } = this.state;
+    const { todos, filter } = this.state;
 
     const totalTodoCount =todos.length;
-    const completedTodosCount = todos.reduce((total,todo)=>(todo.completed?total+1:total),0);
+    const completedTodosCount = todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
+    
+    const normalizeFilter = this.state.filter.toLowerCase();
+    const visibleTodos =this.state.todos.filter(todo=>todo.text.toLowerCase().includes(normalizeFilter));
 
     return(
       <>
-        <Form onSubmit={this.formSubmitHandler} />
+        {/* <Form onSubmit={this.formSubmitHandler} /> */}
 
         <div>
           <p>Main count: {totalTodoCount}</p>
           <p>Done count: {completedTodosCount}</p>
-        </div>
+        </div>        
 
-        <TodoList todos={todos} onDeleteTodo={this.deleteTodos} />
+        <TodoEditor onSubmit={this.addTodo} />
+        <FilterTodo value={filter} onChange={this.changeFilter} />
+
+        {/* <TodoList todos={todos} onDeleteTodo={this.deleteTodos} onToggleCoplited={this.toggleCompleted} /> */}
+        <TodoList todos={visibleTodos} onDeleteTodo={this.deleteTodos} onToggleCoplited={this.toggleCompleted} />
       </>
     );
   };
