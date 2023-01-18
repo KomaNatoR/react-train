@@ -1,5 +1,6 @@
 import React, { Component} from "react";
 
+import Form from "./TodoList/Form/Form";
 import TodoList from "./TodoList";
 import initialTodos from "../todos.json";
 
@@ -7,13 +8,17 @@ import initialTodos from "../todos.json";
 class App extends Component {
   state = {
     todos: initialTodos,
-  }
+  };
 
   deleteTodos = (todoId) => {
     this.setState(prevState => ({
-      todos: prevState.todos.filter(todo=>todo.id !== todoId),
+      todos: prevState.todos.filter(todo => todo.id !== todoId),
     }))
-  }
+  };
+
+  formSubmitHandler = data => {
+    console.log(data);
+  };
     
   render() {
     const { todos } = this.state;
@@ -23,6 +28,8 @@ class App extends Component {
 
     return(
       <>
+        <Form onSubmit={this.formSubmitHandler} />
+
         <div>
           <p>Main count: {totalTodoCount}</p>
           <p>Done count: {completedTodosCount}</p>
@@ -31,7 +38,7 @@ class App extends Component {
         <TodoList todos={todos} onDeleteTodo={this.deleteTodos} />
       </>
     );
-  }
+  };
 };
 export default App;
 
