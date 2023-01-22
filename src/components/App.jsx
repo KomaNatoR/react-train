@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import shortid from "shortid";
 
 // import Form from "./TodoList/Form/Form";
-import TodoList from "./TodoList";
-import TodoEditor from "./TodoList/TodoEditor/TodoEditor";
-import FilterTodo from "./TodoList/FilterTodo/FilterTodo";
+// import TodoList from "./TodoList";
+// import TodoEditor from "./TodoList/TodoEditor/TodoEditor";
+// import FilterTodo from "./TodoList/FilterTodo/FilterTodo";
 import initialTodos from "../todos.json";
 import Modal from "./TodoList/Modal/Modal";
 
@@ -75,13 +75,15 @@ class App extends Component {
 
     
   render() {
-    const { todos, filter, modalVisible } = this.state;
-
-    const totalTodoCount =todos.length;
-    const completedTodosCount = todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
+    const { modalVisible } = this.state;
     
-    const normalizeFilter = this.state.filter.toLowerCase();
-    const visibleTodos =this.state.todos.filter(todo=>todo.text.toLowerCase().includes(normalizeFilter));
+    // const { todos, filter, modalVisible } = this.state;
+
+    // const totalTodoCount =todos.length;
+    // const completedTodosCount = todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
+    
+    // const normalizeFilter = this.state.filter.toLowerCase();
+    // const visibleTodos =this.state.todos.filter(todo=>todo.text.toLowerCase().includes(normalizeFilter));
 
     return(
       <>
