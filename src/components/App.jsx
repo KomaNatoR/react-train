@@ -6,14 +6,35 @@ import TodoList from "./TodoList";
 import TodoEditor from "./TodoList/TodoEditor/TodoEditor";
 import FilterTodo from "./TodoList/FilterTodo/FilterTodo";
 import initialTodos from "../todos.json";
+import Modal from "./TodoList/Modal/Modal";
 
 
 class App extends Component {
   state = {
     todos: initialTodos,
-    filter:"",
+    filter: "",
+    modalVisible:false,
+  };
+// -----------------------------------|   МЕТОДИ ЦИКЛА   
+  componentDidMount() {
+    const todosLocalStor = localStorage.getItem('todos');
+    const todosParse = JSON.parse(todosLocalStor);
+
+    if (todosParse) {
+      this.setState({ todos: todosParse });
+    }
+  };
+  componentDidUpdate(prevProp, prevState) {
+    if (prevState.todos !== this.state.todos) {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
   };
 
+// -----------------------------------|   КАСТОМНІ МЕТОДИ
+  toggleModal = () => {
+    this.setState(({modalVisible})=>({modalVisible:!modalVisible,}));
+  };
+  
   addTodo = (text) => {
 
     const todo = {
@@ -50,9 +71,11 @@ class App extends Component {
   // formSubmitHandler = data => {
   //   console.log(data);
   // };
+
+
     
   render() {
-    const { todos, filter } = this.state;
+    const { todos, filter, modalVisible } = this.state;
 
     const totalTodoCount =todos.length;
     const completedTodosCount = todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
@@ -62,9 +85,14 @@ class App extends Component {
 
     return(
       <>
+        <button type="button" onClick={this.toggleModal}>Open Modal</button>
+        {modalVisible &&
+          (<Modal onClose={this.toggleModal}>
+            <button type="button" onClick={this.toggleModal}>Close Modal</button>
+          </Modal>)}
         {/* <Form onSubmit={this.formSubmitHandler} /> */}
 
-        <div>
+        {/* <div>
           <p>Main count: {totalTodoCount}</p>
           <p>Done count: {completedTodosCount}</p>
         </div>        
@@ -72,8 +100,7 @@ class App extends Component {
         <TodoEditor onSubmit={this.addTodo} />
         <FilterTodo value={filter} onChange={this.changeFilter} />
 
-        {/* <TodoList todos={todos} onDeleteTodo={this.deleteTodos} onToggleCoplited={this.toggleCompleted} /> */}
-        <TodoList todos={visibleTodos} onDeleteTodo={this.deleteTodos} onToggleCoplited={this.toggleCompleted} />
+        <TodoList todos={visibleTodos} onDeleteTodo={this.deleteTodos} onToggleCoplited={this.toggleCompleted} /> */}
       </>
     );
   };

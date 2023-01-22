@@ -22,7 +22,7 @@ class TodoEditor extends Component {
 
         return (
             <form onSubmit={this.hendleSubmit}>
-                <textarea value={this.state.message} onChange={this.hendleChange} ></textarea>
+                <input value={this.state.message} onChange={this.hendleChange} ></input>
                 <button type="submit">Add</button>
             </form>
         );
