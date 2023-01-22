@@ -21,5 +21,29 @@ export const Div = styled.div`
         border-radius: 3px;
         box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),
         0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+
+        button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 8px;
+            width: 31px;
+            heigth: 31px;
+            cursor: pointer;
+
+            font-weight: 700;
+
+            border: 0px solid gray;
+            border-radius: 50%;
+            background-color: lightgrey;
+            color: darkolivegreen;
+
+            transition: all 200ms linear;
+            :hover {
+                color: lightgrey;
+                background-color: darkolivegreen;
+                transform: rotateZ(90deg);
+            }
+        }
     }
 `;

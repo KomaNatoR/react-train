@@ -90,7 +90,7 @@ class App extends Component {
         <button type="button" onClick={this.toggleModal}>Open Modal</button>
         {modalVisible &&
           (<Modal onClose={this.toggleModal}>
-            <button type="button" onClick={this.toggleModal}>Close Modal</button>
+            {/* <button type="button" onClick={this.toggleModal}>Close Modal</button> */}
           </Modal>)}
         {/* <Form onSubmit={this.formSubmitHandler} /> */}
 
