@@ -17,6 +17,7 @@ export const Div = styled.div`
         max-width: 600px;
         width: 100%;
         padding: 12px;
+        
         background-color: #fff;
         border-radius: 3px;
         box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),
@@ -26,24 +27,15 @@ export const Div = styled.div`
             position: absolute;
             top: 10px;
             right: 10px;
-            padding: 8px;
-            width: 31px;
-            heigth: 31px;
-            cursor: pointer;
 
-            font-weight: 700;
-
-            border: 0px solid gray;
-            border-radius: 50%;
-            background-color: lightgrey;
-            color: darkolivegreen;
-
-            transition: all 200ms linear;
-            :hover {
-                color: lightgrey;
-                background-color: darkolivegreen;
-                transform: rotateZ(90deg);
-            }
+            // transition: all 200ms linear;
+            // svg {fill:darkolivegreen;}
+            // :hover {
+            //     color: lightgrey;
+            //     background-color: darkolivegreen;
+            //     transform: rotateZ(90deg);
+            //     svg {fill:lightgrey;}
+            // }            
         }
     }
 `;

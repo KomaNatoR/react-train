@@ -1,19 +1,23 @@
 import React from "react";
 
+import Todo from "./Todo/Todo";
 import Ul from "./todoList.styled";
 
-const TodoList = ({todos,onDeleteTodo,onToggleCoplited}) => {
+const TodoList = ({ todos, onDeleteTodo, onToggleCoplited }) => {
+
     return (
         <Ul>
             {todos.map(({id,text,completed}) => (
                 <li key={id}>
-                    <input type="checkbox" name="licence" onChange={()=>onToggleCoplited(id)} checked={completed} />
-                    <p>{text}</p>
-                    <button onClick={()=>onDeleteTodo(id)}>Delete</button>
+                    <Todo
+                        text={text}
+                        completed={completed}
+                        onToggleCoplited={() => onToggleCoplited(id)}
+                        onDeleteTodo={() => onDeleteTodo(id)}
+                    />
                 </li>
             ))}
         </Ul>
-        
     );
 };
 export default TodoList;

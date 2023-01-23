@@ -2,16 +2,18 @@ import React, { Component } from "react";
 import shortid from "shortid";
 
 // import Form from "./TodoList/Form/Form";
-// import TodoList from "./TodoList";
-// import TodoEditor from "./TodoList/TodoEditor/TodoEditor";
-// import FilterTodo from "./TodoList/FilterTodo/FilterTodo";
-import initialTodos from "../todos.json";
+import TodoList from "./TodoList";
+import TodoEditor from "./TodoList/TodoEditor/TodoEditor";
+import FilterTodo from "./TodoList/FilterTodo/FilterTodo";
+// import initialTodos from "../todos.json";
 import Modal from "./TodoList/Modal/Modal";
+import IconButton from "./TodoList/IconButton/IconButton";
+import { ReactComponent as AddIcon } from "./icons/add.svg";
 
 
 class App extends Component {
   state = {
-    todos: initialTodos,
+    todos: [],
     filter: "",
     modalVisible:false,
   };
@@ -25,8 +27,13 @@ class App extends Component {
     }
   };
   componentDidUpdate(prevProp, prevState) {
-    if (prevState.todos !== this.state.todos) {
+    const { todos } = this.state;
+
+    if (prevState.todos !== todos) {
       localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+    if (todos.length > prevState.todos.length && prevState.todos.length !== 0) {
+      this.toggleModal(); // --- робимо перевірку щоб само закривало модалку
     }
   };
 
@@ -46,6 +53,8 @@ class App extends Component {
     this.setState(prevState => ({
       todos: [todo,...prevState.todos],
     }));
+
+    // this.toggleModal();
   };
 
   deleteTodos = (todoId) => {
@@ -75,51 +84,42 @@ class App extends Component {
 
     
   render() {
-    const { modalVisible } = this.state;
+    // const { modalVisible } = this.state;
     
-    // const { todos, filter, modalVisible } = this.state;
+    const { todos, filter, modalVisible } = this.state;
 
-    // const totalTodoCount =todos.length;
-    // const completedTodosCount = todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
+    const totalTodoCount =todos.length;
+    const completedTodosCount = todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
     
-    // const normalizeFilter = this.state.filter.toLowerCase();
-    // const visibleTodos =this.state.todos.filter(todo=>todo.text.toLowerCase().includes(normalizeFilter));
+    const normalizeFilter = filter.toLowerCase();
+    const visibleTodos = todos.filter(todo => todo.text.toLowerCase().includes(normalizeFilter));
+    // console.log(visibleTodos);
+    // console.log(todos);
 
     return(
       <>
-        <button type="button" onClick={this.toggleModal}>Open Modal</button>
+        
+        {/* <button type="button" onClick={this.toggleModal}>Open Modal</button> */}
+        <IconButton onClick={this.toggleModal} aria-label="add todo">
+          <AddIcon width="18" height="18"  />
+        </IconButton>
         {modalVisible &&
           (<Modal onClose={this.toggleModal}>
+            <TodoEditor onSubmit={this.addTodo} />
             {/* <button type="button" onClick={this.toggleModal}>Close Modal</button> */}
           </Modal>)}
         {/* <Form onSubmit={this.formSubmitHandler} /> */}
 
-        {/* <div>
+        <div>
           <p>Main count: {totalTodoCount}</p>
           <p>Done count: {completedTodosCount}</p>
         </div>        
 
-        <TodoEditor onSubmit={this.addTodo} />
         <FilterTodo value={filter} onChange={this.changeFilter} />
 
-        <TodoList todos={visibleTodos} onDeleteTodo={this.deleteTodos} onToggleCoplited={this.toggleCompleted} /> */}
+        <TodoList todos={visibleTodos} onDeleteTodo={this.deleteTodos} onToggleCoplited={this.toggleCompleted} />
       </>
     );
   };
 };
 export default App;
-
-
-
-    // <div
-    //   style={{
-    //     height: '100vh',
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     fontSize: 40,
-    //     color: '#010101'
-    //   }}
-    // >
-      
-    // </div>

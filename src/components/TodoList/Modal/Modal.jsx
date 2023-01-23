@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { createPortal } from "react-dom";
 
 import { Div } from "./modal.styled";
+import IconButton from "../IconButton/IconButton";
+import { ReactComponent as CloseIcon } from "../../icons/close.svg";
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -19,9 +21,9 @@ export default class Modal extends Component {
     };
     hendleBackdropClick = e => {
         const { onClose } = this.props;
-        if (e.currentTarget===e.target) onClose();
+        if (e.currentTarget === e.target) onClose();
     };
-    hendleBntClick=()=> this.props.onClose();
+    hendleBntClick = () => this.props.onClose();
 
 
     render() {
@@ -30,7 +32,9 @@ export default class Modal extends Component {
         return createPortal(
             <Div onClick={this.hendleBackdropClick}>
                 <div>
-                    <button type="button" onClick={this.hendleBntClick}>X</button>
+                    <IconButton type="button" onClick={this.hendleBntClick}>
+                        <CloseIcon width="18" height="18" />
+                    </IconButton>
                     {this.props.children}
                 </div>
             </Div>,

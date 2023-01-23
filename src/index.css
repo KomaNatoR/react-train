@@ -15,8 +15,16 @@ code {
 }
 
 .test {
-  border-radius: 50%;
-  background-color: lightgrey;
-  color: darkolivegreen;
-  transform: rotateX(45deg);
+ margin: 0;
+ padding: 10px;
+ border: none;
+ border-radius: 50%;
+ color: white;
+ font: inherit;
+ background-color: lightgray;
+ cursor: pointer;
+
+ display: flex;
+ align-items: center;
+ justify-content: center;
 }
