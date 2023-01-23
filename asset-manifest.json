@@ -1,13 +1,16 @@
 {
   "files": {
-    "main.css": "/react-train/static/css/main.44a92102.css",
-    "main.js": "/react-train/static/js/main.1c4668da.js",
+    "main.css": "/react-train/static/css/main.65a65731.css",
+    "main.js": "/react-train/static/js/main.6847e424.js",
     "index.html": "/react-train/index.html",
-    "main.44a92102.css.map": "/react-train/static/css/main.44a92102.css.map",
-    "main.1c4668da.js.map": "/react-train/static/js/main.1c4668da.js.map"
+    "static/media/close.svg": "/react-train/static/media/close.e9e93c9cdab742dec2831eba285804c5.svg",
+    "static/media/delete.svg": "/react-train/static/media/delete.733337b1ca6a3a14609439a30bad9966.svg",
+    "static/media/add.svg": "/react-train/static/media/add.f3eef107e7a55bf104a617b5d25cc8f0.svg",
+    "main.65a65731.css.map": "/react-train/static/css/main.65a65731.css.map",
+    "main.6847e424.js.map": "/react-train/static/js/main.6847e424.js.map"
   },
   "entrypoints": [
-    "static/css/main.44a92102.css",
-    "static/js/main.1c4668da.js"
+    "static/css/main.65a65731.css",
+    "static/js/main.6847e424.js"
   ]
 }
